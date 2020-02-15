@@ -1,0 +1,21 @@
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend>Join Today</legend>
+            {{ form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info">Sign Up</button>
+        </div>
+    </form>
+
+    <div class="border-top pt-3">
+        <small>Already have an account?<a href="{% url 'login' %}">Sign In</a></small>
+
+    </div>
+
+{% endblock content %}
