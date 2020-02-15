@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, UserUpdateForm, ProfileUpdateForm
 
 from django.http import HttpResponse
 
@@ -8,8 +8,10 @@ from django.contrib import messages
 
 from django.contrib.auth.forms import UserCreationForm
 
+from django.contrib.auth.decorators import login_required
+
 def home(request):
-    return HttpResponse('<h2>oiuytr</h2>')
+    return render(request, 'wards/home.html')
 
 def register(request):
     '''
@@ -25,4 +27,26 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, 'auth/register.html', {'form': form})
+        
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated')
+            return redirect('profile')
+        else:
+            u_form = UserUpdateForm(instance=request.user)
+            p_form = ProfileUpdateForm(instance=request.user.profile)
+    
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+    
+    return render(request, 'wards/profile.html', context)
         
