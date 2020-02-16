@@ -9,14 +9,12 @@
             <legend>Join Today</legend>
             {{ form|crispy }}
         </fieldset>
-        <div class="form-group">
+        <div class="form-grp">
             <button class="btn btn-outline-info">Sign Up</button>
         </div>
     </form>
 
     <div class="border-top pt-3">
         <small>Already have an account?<a href="{% url 'login' %}">Sign In</a></small>
-
     </div>
-
 {% endblock content %}

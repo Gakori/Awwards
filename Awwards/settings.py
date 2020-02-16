@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'pyuploadcare.dj',
     'bootstrap4',
     'crispy_forms',
     'wards.apps.WardsConfig',
@@ -57,7 +58,7 @@ ROOT_URLCONF = 'Awwards.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,6 +70,11 @@ TEMPLATES = [
         },
     },
 ]
+
+UPLOADCARE = {
+    'pub_key': '4ccf9d5fc0ae9adee048',
+    'secret': '7489c08ab884c1acb388',
+}
 
 WSGI_APPLICATION = 'Awwards.wsgi.application'
 
