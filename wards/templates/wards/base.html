@@ -12,7 +12,7 @@
     {% else %}
     <title>Awwards</title>
     {% endif %}
-
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
     {% block styles %}
         {% bootstrap_css %}
         <link rel="stylesheet" href="{% static 'css/main.css' %}">
@@ -31,17 +31,15 @@
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <a class="nav-link" href="{% url 'wards-home' %}">Home<span class="sr-only">(current)</span></a>
-          <a class="nav-link" href="#">Profile<span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#"></a>
+          <a class="nav-link" href="{% url 'post-create' %}">Post<span class="sr-only">(current)</span></a>
         </li>
           </div>
-        <li class="nav-item">
-          <a class="" href="{% url 'login' %}" tabindex="-1">Login</a>
+      
+          <a class="" href="{% url 'login' %}" tabindex="-1">Login/</a>
           <a class="" href="{% url 'register' %}" tabindex="-1">Register</a>
-        </li>
+          <a class="nav-link" href="#">Profile<span class="sr-only">(current)</span></a>
       </ul>
+      
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -59,7 +57,6 @@
 
      {% block content %}
      {% endblock content %}
-
     {% block scripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     
