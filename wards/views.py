@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from .forms import UserRegistrationForm, UserUpdateForm, ProfileUpdateForm
+from .forms import UserRegistrationForm, UserUpdateForm, ProfileUpdateForm, PostForm
 
 from django.http import HttpResponse
 
@@ -10,8 +10,42 @@ from django.contrib.auth.forms import UserCreationForm
 
 from django.contrib.auth.decorators import login_required
 
+from django.views.generic import ListView , CreateView
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+from .models import Post
+
+from django.urls import reverse_lazy
+
 def home(request):
-    return render(request, 'wards/home.html')
+    context = {
+        'posts':Post.objects.all()
+    }
+    
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+    else:
+        form = PostForm()
+
+    try:
+        posts = Post.objects.all()
+    except Post.DoesNotExist:
+        posts = None
+    
+    return render(request, 'wards/home.html', { 'posts': posts, 'form': form })
+
+class PostCreateView(LoginRequiredMixin, CreateView):
+    model = Post
+    fields = ['title', 'description']
+    success_url = reverse_lazy('wards-home')
+    
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
 def register(request):
     '''
