@@ -1,0 +1,18 @@
+{% extends 'wards/base.html' %}
+
+{% block content %}
+    <h1>Gallery app</h1>
+
+    <img src="{{post.author.profile.image.url}}" alt=""sty
+    height="20%" width="20%">
+    <h1>{{ object.title }}</h1>
+    <p>{{ object.category }}</p>
+
+{% if object.author == user %}
+    <a href="{% url 'post-update' object.id %}" class="btn btn-secondary">Update</a>
+    <a href="{% url 'post-delete' object.id %}" class="btn btn-danger">Delete</a>
+{% endif %}
+
+    <p>Posted by {{ object.author }}</p>
+    <p>Posted on {{ object.date_posted|date:'F d, Y' }}</p>
+{% endblock content %}
