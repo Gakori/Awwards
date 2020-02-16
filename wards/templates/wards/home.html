@@ -1,5 +1,27 @@
 {% extends 'wards/base.html' %}
+{% load bootstrap4 %}
+{{ form.media }}
 
 {% block content %}
-<h1>awwardslkjshgd</h1>
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Save"/>
+</form>
+
+{% if posts %}
+{% for post in posts %}
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="{{ post.photo.cdn_url }}-/crop/600x600/center/-/quality/lightest/" alt="">
+</div>
+
+    <div class="card-body">
+    <h1>{{ post.title }}</h1>
+    <h1>{{ post.description }}</h1>
+    <h1>Posted by {{ post.author }}</h1>
+    <h1>Posted on {{ post.date_posted}}</h1>
+    </div> 
+{% endfor %}
+{% endif %}
 {% endblock content %}
