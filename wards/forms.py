@@ -4,16 +4,16 @@ from django.contrib.auth.models import User
 
 from django import forms
 
-from .models import Profile, Post
+from .models import Profile, Post, Review
 
 from pyuploadcare.dj.forms import ImageField
 
-class UserRegistrationForm(UserCreationForm):
+class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
-    
+
     class Meta:
-        models = 'User'
-        fields = ['Username', 'Email', 'Password1', 'Password2']
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
         
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
@@ -26,7 +26,7 @@ class ProfileUpdateForm(forms.ModelForm):
     
     class Meta:
         model = Profile
-        fields = ['image' ,'bio', 'contacts']
+        fields = ['image', 'bio']
         
 class PostForm(forms.ModelForm):
     photo = ImageField(label='')
@@ -34,3 +34,10 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('photo',)
+        
+class ReviewForm(forms.ModelForm):
+    
+    class Meta:
+        model = Review
+        fields = ['body']
+        
