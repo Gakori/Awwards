@@ -40,7 +40,7 @@ def home(request):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'description']
+    fields = ['title', 'author', 'description', 'live_link']
     success_url = reverse_lazy('wards-home')
     
     def form_valid(self, form):
