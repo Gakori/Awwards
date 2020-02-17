@@ -27,6 +27,7 @@ from django.conf.urls.static import static
 
 from django.conf import settings
 
+from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
     
@@ -46,7 +47,10 @@ urlpatterns = [
     
     path('profile/', wards_views.profile, name='profile'),
     
-    # path('post/<int:pk>/review/', views.review, name='review'),
+    path('post/', views.PostList.as_view()),
+    
+    path('profile/', views.ProfileList.as_view()),
+
 ]
 
 if settings.DEBUG:

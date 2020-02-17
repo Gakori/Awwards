@@ -2,51 +2,58 @@
 
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <a class="btn" id="link" href="https://github.com/Gakori/Github-search" style="margin-top: 20%; text-align: center;">View site</a>  
-  
+    <a
+      class="btn"
+      id="link"
+      href="https://github.com/Gakori/Github-search"
+      style="margin-top: 20%; text-align: center;"
+      >View site</a
+    >
   </div>
 </div>
-
-{% if posts %} {% for post in posts %}
 
 <div class="container">
-  <div class="row"> 
-<div class="col-md-6">
-<div class="card mb-3" style="max-width: 540px;">
-  <div class="row no-gutters">
-    <div class="col-md-4">
-      <img
-        class="col"
-        src="{{ post.photo.cdn_url }}-/crop/600x600/center/-/quality/lightest/"
-        alt=""
-      />
-    </div>
+  <div class="row">
+    {% if posts %} {% for post in posts %}
+    <div class="col-md-6">
+      <div class="card mb-3" style="max-width: 540px;">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img
+              class="col"
+              src="{{ post.photo.cdn_url }}-/crop/600x600/center/-/quality/lightest/"
+              alt=""
+            />
+          </div>
 
-    <div class="col-md-8">
-      <div class="card-body">
-        <h1>{{ post.title }}</h1>
-        <h2>{{ post.description }}</h2>
-        <h2>Posted by {{ post.author }}</h2>
-        <h2>Posted on {{ post.date_posted }}</h2>
-        <button class="btn">
-          <a href="{{post.live_link}}" id="link">View Site</a>
-        </button>
-        <a href="#">Rate</a>
-        <a href="{% url 'post-detail' post.id %}">Review</a>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h1>{{ post.title }}</h1>
+              <h2>{{ post.description }}</h2>
+              <h2>Posted by {{ post.author }}</h2>
+              <h2>Posted on {{ post.date_posted }}</h2>
+              <button class="btn">
+                <a href="{{post.live_link}}" id="link">View Site</a>
+              </button>
+              <a href="#">Rate</a>
+              <a href="{% url 'post-detail' post.id %}" class="rev" style="color: blue; font-size: 20px;">Review</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
+    {% endfor %} {% endif %}
   </div>
 </div>
-</div>
-</div>
-</div>
 
-{% endfor %} {% endif %} 
 <footer>
   <a href="https://www.facebook.com/" class="fa fa-facebook">faithgakori</a>
   <a href="https://www.instagram.com/" class="fa fa-instagram">gakori</a>
   <a href="" class="fa fa-phone"> 0713125890</a>
-  <a href="https://www.gmail.com/" class="fa fa-envelope">faithgakori@gmail.com</a>
-  <p style="text-align: center; color: white;">© Copyright - Gakori 2020 </p>
-</footer> 
+  <a href="https://www.gmail.com/" class="fa fa-envelope"
+    >faithgakori@gmail.com</a
+  >
+  <p style="text-align: center; color: white;">© Copyright - Gakori 2020</p>
+</footer>
 {% endblock content %}
