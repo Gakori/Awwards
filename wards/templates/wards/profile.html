@@ -1,26 +1,26 @@
-{% extends 'wards/base.html' %}
-{% load crispy_forms_tags %}    
-
-{% block content %}
-
+{% extends 'wards/base.html' %} {% load crispy_forms_tags %} {% block content %}
 <div class="content section">
-    <img src="{{ user.profile.image.url }}" alt="..." class="roun" style="border-radius: 50%; width: 200px;">
+  <img
+    src="{{ user.profile.image.url }}"
+    alt="..."
+    class="roun"
+    style="border-radius: 50%; width: 200px;"
+  />
 
-    <div class="media-body">
-      <h3>{{user.username}}</h3>
-      <h3>{{profile.user.bio}}</h3>
-      <h3>{{user.email}}</h3>
-    </div>
-  
-    <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      <fieldset class="form-group">
-          <legend class="border-bottom mb-4">Profile Info</legend>
-          {{ u_form|crispy }}
-          {{ p_form|crispy }}
-          <button class="btn btn-outline-info" type="submit">Update</button>
-      </fieldset>
-    </form>
+  <div class="media-body">
+    <h3>{{user.username}}</h3>
+    <h3>{{profile.user.bio}}</h3>
+    <h3>{{user.email}}</h3>
   </div>
+
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <fieldset class="form-group">
+      <legend class="border-bottom mb-4">Profile Info</legend>
+      {{ u_form|crispy }} {{ p_form|crispy }}
+      <button class="btn btn-outline-info" type="submit">Update</button>
+    </fieldset>
+  </form>
+</div>
 
 {% endblock content %}
