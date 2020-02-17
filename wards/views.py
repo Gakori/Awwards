@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, PostForm, ReviewForm
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, PostForm
 
 from django.http import HttpResponse
 
@@ -14,9 +14,19 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
-from .models import Post, Review
+from .models import Post, Review, Profile
 
 from django.urls import reverse_lazy
+
+from django.shortcuts import get_object_or_404
+
+from rest_framework.views import APIView
+
+from rest_framework.response import Response
+
+from rest_framework import status
+
+from . serializers import PostSerializers
 
 def home(request):
     context = {
@@ -38,6 +48,24 @@ def home(request):
         
     return render(request, 'wards/home.html', { 'posts': posts, 'form': form })
 
+class PostList(APIView):
+    def get(self, request):
+        post1 = Post.objects.all()
+        serializer = PostSerializers(post1, many=True)
+        return Response(serializer.data)
+        
+    def post(self):
+        pass
+    
+class ProfileList(APIView):
+    def get(self, request):
+        profile1 = Profile.objects.all()
+        serializer = ProfileSerializers(profile1, many=True)
+        return Response(serializer.data)
+        
+    def post(self):
+        pass
+
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     fields = ['title', 'author', 'description', 'live_link', 'photo']
@@ -49,6 +77,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     
 class PostDetailView(DetailView):
     model = Post
+    success_url = reverse_lazy('wards-home')
     
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
@@ -82,7 +111,7 @@ def register(request):
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'Account created for {username}!')
-            return redirect('wards-home')
+            return redirect('login')
     else:
         form = UserRegisterForm()
     return render(request, 'auth/register.html', {'form': form})
