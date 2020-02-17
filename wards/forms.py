@@ -35,9 +35,5 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ('photo',)
         
-class ReviewForm(forms.ModelForm):
-    
-    class Meta:
-        model = Review
-        fields = ['body']
+
         
