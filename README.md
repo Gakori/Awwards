@@ -59,6 +59,9 @@ Then run the command to create a new database
 * Css
 * Postgres
 
+## KNOWN BUGS
+  Ratings not working at the moment but it is under development
+
 ## CONTACT INFORMATION
  For email reach us through faithgakori506@gmail.com
 

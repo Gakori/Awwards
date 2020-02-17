@@ -66,6 +66,7 @@ class ProfileList(APIView):
     def post(self):
         pass
 
+# @login_required
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     fields = ['title', 'author', 'description', 'live_link', 'photo']
